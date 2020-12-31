@@ -1,15 +1,19 @@
 const store = {
     debug: true,
     state: {
-        message: 'Hello!'
+        message: 'Hello!',
+        pathname:'/home',
+        position:{page:{Index:1,Size:10},query:{}},
+        panes:[{ key: '0',title: '首页',path:'/home',closable:false,routesIndex:0 }],
+        activeTabsKey:'0',
+        RoutesIndex:0,
+        MenuData:[]
     },
-    setMessageAction(newValue) {
-        if (this.debug) console.log('setMessageAction triggered with', newValue)
-        this.state.message = newValue
+    setPanes(data){
+        store.state.panes = data;
     },
-    clearMessageAction() {
-        if (this.debug) console.log('clearMessageAction triggered')
-        this.state.message = ''
+    setMenuData(data){
+        store.state.MenuData = data;
     }
 }
 export default store;

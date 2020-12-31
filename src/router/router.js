@@ -3,8 +3,9 @@ import VueRouter from "vue-router";
 
 // 引入组件
 import home from "../view/home/home.vue";
-const about = () => import('../view/about/about.vue')
+const Login = () => import('../view/user/login.vue')
 const tacos = () => import('../view/tacos/tacos.vue')
+const about = () => import('../view/about/about.vue')
 const notfound = () => import('../notfound/404.vue')
 // 要告诉 vue 使用 vueRouter
 Vue.use(VueRouter);
@@ -27,12 +28,12 @@ const routes = [
             {
                 path: '/',
                 redirect: '/home'
-            },
+            }
         ]
     },
     {
         path: "/login",
-        component: about
+        component: Login
     },
     {
         path: '*',
@@ -41,6 +42,7 @@ const routes = [
 ]
 
 var router = new VueRouter({
+    mode: 'history',
     routes
 })
 export default router;

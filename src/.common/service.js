@@ -8,8 +8,6 @@ const hearder = {
     'X-Requested-With': 'XMLHttpRequest',
     'ApiKey': ''
 }
-
-console.log("notification,", notification)
 async function Fetch(url, method, body) {
     return await axios({
         method: method,
