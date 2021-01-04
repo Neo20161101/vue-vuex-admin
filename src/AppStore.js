@@ -14,6 +14,9 @@ const store = {
     },
     setMenuData(data){
         store.state.MenuData = data;
+    },
+    setPosition(data){
+        store.state.position = data;
     }
 }
 export default store;

@@ -19,11 +19,27 @@ const routes = [
                 // 当 /home 匹配成功，
                 // UserProfile 会被渲染在 User 的 <router-view> 中
                 path: 'home',
-                component: about
+                component: tacos
             },
             {
-                path: 'tacos',
-                component: tacos
+                path: 'BasisInfo',
+                component: () => import('../view/youping/youping.vue'),
+                children: [
+                    {
+                        // 当 /BasisInfo 匹配成功，
+                        // UserProfile 会被渲染在 User 的 <router-view> 中
+                        path: '0',
+                        component: () => import('../view/youping/youping.vue')
+                    },
+                    {
+                        path: '1',
+                        component: about
+                    },
+                    {
+                        path: '*',
+                        component: notfound
+                    }
+                ]
             },   // 重定向
             {
                 path: '/',

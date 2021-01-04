@@ -38,7 +38,7 @@
       </div>
     </a-layout-header>
     <a-layout>
-      <Menu :treedata="treedata" />
+      <Menu :treedata="treedata" :selectedKeyData="selectedKeyData" />
       <a-layout>
         <div>
           <a-tabs
@@ -74,7 +74,7 @@
 <script>
 import Menu from "../../Menu";
 import Logo_img from "../../assets/logo.png";
-import Store from "../../AppStore";
+import Store from "@/AppStore";
 export default {
   data() {
     return {
@@ -90,32 +90,33 @@ export default {
       activeTabsKey: Store.state.activeTabsKey,
       panes: Store.state.panes,
       treedata: [],
+      selectedKeyData:[]
     };
   },
   components: { Menu },
   created() {
     // 组件创建完后获取数据，
     // 此时 data 已经被 observed 了
-    this.fetchData();
     this.init();
+    this.fetchData();
   },
   beforeRouteEnter(to, from, next) {
-    const {
-      state: { RoutesIndex },
-    } = Store;
-    console.log("beforeRouteEnter,", RoutesIndex);
+    // const {
+    //   state: { RoutesIndex },
+    // } = Store;
+    // console.log("beforeRouteEnter,",RoutesIndex)
     next();
   },
   // 路由改变前，组件就已经渲染完了
   // 逻辑稍稍不同
   beforeRouteUpdate(to, from, next) {
     const {
-      state: { pathname, activeTabsKey, panes, RoutesIndex },
+      state: { pathname, activeTabsKey, panes },
     } = Store;
     this.pathname = pathname;
     this.activeTabsKey = activeTabsKey;
     this.panes = panes;
-    console.log("beforeRouteUpdate,", RoutesIndex);
+    this.selectedKeyData = [to.path];
     this.treedata2 = [
       {
         Children: null,
@@ -166,7 +167,7 @@ export default {
         state: { panes },
         setPanes,
       } = Store;
-      const RoutesIndex = sessionStorage.getItem("RoutesIndex");
+      const RoutesIndex = sessionStorage.getItem("RoutesIndex")||0;
       const UserInfoPm = JSON.parse(sessionStorage.getItem("UserInfoPm"));
       const LastTime = sessionStorage.getItem("LastTime");
       const pathname = sessionStorage.getItem("pathname") || "/home";
@@ -196,6 +197,7 @@ export default {
       setPanes(panesDataKey);
       this.panes = panesDataKey;
       this.pathname = pathname;
+      this.selectedKeyData = [pathname];
     },
     fetchData() {
       this.error = this.post = null;
@@ -230,17 +232,284 @@ export default {
           Level: 1,
           MenuId: "01",
           MenuPid: "",
-          Path: "/tacos",
-          Name: "tacos",
+          Path: "/BasisInfo",
+          Name: "基础信息",
           Icon: "-4px -3px",
           Children: [
             {
               Idc: 0,
               Level: 2,
+              MenuId: "0110",
+              MenuPid: "01",
+              Path: "/BasisInfo/0",
+              Name: "油品管理",
+              Icon: "-4px -3px",
+            },
+            {
+              Idc: 1,
+              Level: 2,
               MenuId: "0111",
               MenuPid: "01",
-              Path: "/tacos",
-              Name: "tacos",
+              Path: "/BasisInfo/1",
+              Name: "客户管理",
+              Icon: "-4px -3px",
+            },
+            {
+              Idc: 2,
+              Level: 2,
+              MenuId: "0112",
+              MenuPid: "01",
+              Path: "/BasisInfo/2",
+              Name: "供应商管理",
+              Icon: "-4px -3px",
+            },
+            {
+              Idc: 3,
+              Level: 2,
+              MenuId: "0113",
+              MenuPid: "01",
+              Path: "/BasisInfo/3",
+              Name: "租户管理",
+              Icon: "-4px -3px",
+            },
+            {
+              Idc: 4,
+              Level: 2,
+              MenuId: "0114",
+              MenuPid: "01",
+              Path: "/BasisInfo/4",
+              Name: "运输公司管理",
+              Icon: "-4px -3px",
+            },
+            {
+              Idc: 5,
+              Level: 2,
+              MenuId: "0115",
+              MenuPid: "01",
+              Path: "/BasisInfo/5",
+              Name: "装卸鹤位管理",
+              Icon: "-4px -3px",
+            },
+            {
+              Idc: 6,
+              Level: 2,
+              MenuId: "0116",
+              MenuPid: "01",
+              Path: "/BasisInfo/6",
+              Name: "储罐管理",
+              Icon: "-4px -3px",
+            },
+            {
+              Idc: 7,
+              Level: 2,
+              MenuId: "0117",
+              MenuPid: "01",
+              Path: "/BasisInfo/7",
+              Name: "牵引车管理",
+              Icon: "-4px -3px",
+            },
+            {
+              Idc: 8,
+              Level: 2,
+              MenuId: "0118",
+              MenuPid: "01",
+              Path: "/BasisInfo/8",
+              Name: "挂车管理",
+              Icon: "-4px -3px",
+            },
+            {
+              Idc: 9,
+              Level: 2,
+              MenuId: "0119",
+              MenuPid: "01",
+              Path: "/BasisInfo/9",
+              Name: "司机管理",
+              Icon: "-4px -3px",
+            },
+            {
+              Idc: 10,
+              Level: 2,
+              MenuId: "0120",
+              MenuPid: "01",
+              Path: "/BasisInfo/10",
+              Name: "押运员管理",
+              Icon: "-4px -3px",
+            },
+          ],
+        },
+        {
+          Idc: 2,
+          Level: 1,
+          MenuId: "02",
+          MenuPid: "",
+          Path: "/Business",
+          Name: "业务管理",
+          Icon: "-4px -3px",
+          Children: [
+            {
+              Idc: 0,
+              Level: 2,
+              MenuId: "0110",
+              MenuPid: "01",
+              Path: "/Business",
+              Name: "销售合同管理",
+              Icon: "-4px -3px",
+            },
+            {
+              Idc: 1,
+              Level: 2,
+              MenuId: "0111",
+              MenuPid: "01",
+              Path: "/Business1",
+              Name: "采购合同管理",
+              Icon: "-4px -3px",
+            },
+            {
+              Idc: 2,
+              Level: 2,
+              MenuId: "0112",
+              MenuPid: "01",
+              Path: "/Business2",
+              Name: "租户合同管理",
+              Icon: "-4px -3px",
+            },
+            {
+              Idc: 3,
+              Level: 2,
+              MenuId: "0113",
+              MenuPid: "01",
+              Path: "/Business3",
+              Name: "直销管理",
+              Icon: "-4px -3px",
+            },
+            {
+              Idc: 4,
+              Level: 2,
+              MenuId: "0114",
+              MenuPid: "01",
+              Path: "/Business4",
+              Name: "出库管理",
+              Icon: "-4px -3px",
+            },
+            {
+              Idc: 5,
+              Level: 2,
+              MenuId: "0115",
+              MenuPid: "01",
+              Path: "/Business5",
+              Name: "入库管理",
+              Icon: "-4px -3px",
+            },
+            {
+              Idc: 6,
+              Level: 2,
+              MenuId: "0116",
+              MenuPid: "01",
+              Path: "/Business6",
+              Name: "结算管理",
+              Icon: "-4px -3px",
+            },
+          ],
+        },
+        {
+          Idc: 3,
+          Level: 1,
+          MenuId: "03",
+          MenuPid: "",
+          Path: "/Statistical",
+          Name: "报表",
+          Icon: "-4px -3px",
+          Children: [
+            {
+              Idc: 0,
+              Level: 2,
+              MenuId: "0110",
+              MenuPid: "01",
+              Path: "/Statistical",
+              Name: "租户出入库月表",
+              Icon: "-4px -3px",
+            },
+            {
+              Idc: 1,
+              Level: 2,
+              MenuId: "0111",
+              MenuPid: "01",
+              Path: "/Statistical1",
+              Name: "东来出库日汇总表",
+              Icon: "-4px -3px",
+            },
+            {
+              Idc: 2,
+              Level: 2,
+              MenuId: "0112",
+              MenuPid: "01",
+              Path: "/Statistical2",
+              Name: "东来入库日汇总表",
+              Icon: "-4px -3px",
+            },
+          ],
+        },
+        {
+          Idc: 4,
+          Level: 1,
+          MenuId: "04",
+          MenuPid: "",
+          Path: "/System",
+          Name: "系统管理",
+          Icon: "-4px -3px",
+          Children: [
+            {
+              Idc: 0,
+              Level: 2,
+              MenuId: "0110",
+              MenuPid: "01",
+              Path: "/System",
+              Name: "组织架构管理",
+              Icon: "-4px -3px",
+            },
+            {
+              Idc: 1,
+              Level: 2,
+              MenuId: "0111",
+              MenuPid: "01",
+              Path: "/System1",
+              Name: "权限管理",
+              Icon: "-4px -3px",
+            },
+            {
+              Idc: 2,
+              Level: 2,
+              MenuId: "0112",
+              MenuPid: "01",
+              Path: "/System2",
+              Name: "系统配置",
+              Icon: "-4px -3px",
+            },
+            {
+              Idc: 3,
+              Level: 2,
+              MenuId: "0113",
+              MenuPid: "01",
+              Path: "/System3",
+              Name: "车辆安检模板管理",
+              Icon: "-4px -3px",
+            },
+            {
+              Idc: 4,
+              Level: 2,
+              MenuId: "0114",
+              MenuPid: "01",
+              Path: "/System4",
+              Name: "化验模板内容管理",
+              Icon: "-4px -3px",
+            },
+            {
+              Idc: 5,
+              Level: 2,
+              MenuId: "0115",
+              MenuPid: "01",
+              Path: "/System5",
+              Name: "车辆内容调度",
               Icon: "-4px -3px",
             },
           ],
@@ -257,8 +526,10 @@ export default {
     onBreakpoint(broken) {
       console.log(broken);
     },
-    onLoginOut() {
-      console.log(Store);
+    onLoginOut(e) {
+      // console.log(Store);
+      e.preventDefault();
+      this.$router.replace("/Login");
     },
     onMenuClick(e, value, index) {
       //头部导航按钮事件
@@ -351,7 +622,7 @@ export default {
         }
         setPanes(panesData); //保存当前标签导航
         Store.state.activeTabsKey = `${TabsKey}`; //记住当前标签导航焦点
-        this.$router.replace(panesData[TabsKey].path);
+        // this.$router.replace(panesData[TabsKey].path);
       }
       console.error("删除后的，", panesData);
     },

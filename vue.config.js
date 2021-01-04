@@ -1,4 +1,4 @@
-// vue.config.js for less-loader@6.0.0
+// vue.config.js
 module.exports = {
     css: {
         loaderOptions: {
@@ -24,5 +24,13 @@ module.exports = {
             },
         },
     },
+    // configureWebpack:{
+    //     resolve: {
+    //         alias: {
+    //           '@@': resolve('static') // 这里采用两个@符号来代替路径的别名，因为一个@符号已经默认被设置src的路径了，为了不影响原有的功能，这里采用两个@字符
+    //         }
+    //     },
+    // },
     runtimeCompiler: true,
+    productionSourceMap:false,//打包去掉map文件
 };

@@ -42,7 +42,7 @@ body,
     width: 100%;
 }
 .site-page-header-ghost-wrapper{
-    background-color: #f5f5f5;
+    /* background-color: #f5f5f5; */
 }
 .form{
     background-color: #f0f2f5;
@@ -56,7 +56,7 @@ body,
 }
 .Sider_title .name{
     font-size: 1.6rem;
-    vertical-align: text-bottom;
+    vertical-align: text-top;
 }
 .Sider_title img{
     width: 20px;
@@ -85,6 +85,18 @@ body,
     height: 20px;
     background-size: 143px 143px;
     background-repeat: no-repeat;
-    margin: 0 auto;
+    float: left;
+    margin-top: 9px;
+}
+/* // 成功色 */
+.ant-btn.ant-btn-success{
+  color: #fff;
+  background: #52c41a;
+  border-color: #52c41a;
+}
+.ant-btn.ant-btn-success:hover, .ant-btn.ant-btn-success:focus{
+  color: #fff;
+  background: #52c41a;
+  border-color: #52c41a;
 }
 </style>
